@@ -1,6 +1,9 @@
 <?php
 
 namespace Database\Seeders;
+use  Database\Seeders\PermissionSeeder;
+use  Database\Seeders\CreateSuperAdminUserSeeder;
+use  Database\Seeders\RoomTypesPermissionSeeder;
 
 use Illuminate\Database\Seeder;
 
@@ -16,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StaffSeeder::class);
         $this->call(PermissionSeeder::class);
         $this->call(CreateSuperAdminUserSeeder::class);
+        $this->call(RoomTypesPermissionSeeder::class);
     }
 }
