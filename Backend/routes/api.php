@@ -19,6 +19,7 @@ Route::middleware('auth:api')->group(function () {
     /*
         Here You can Write your auth route
     */
+    Route::post('logout',    [UserAuthController::class, 'logout']);
 
 
     /** Roles Route */
