@@ -38,10 +38,10 @@ Route::middleware('auth:api')->group(function () {
         Route::delete('users/{id}',       [UserController::class, 'destroy']) ->middleware('permission:user-delete');
 
     /** Room Type Route */
-    Route::get       ('room-types',            [RoomTypesController::class, 'index'])   ->middleware('permission:room-type-list');
-    Route::post      ('room-types/create',     [RoomTypesController::class, 'store'])   ->middleware('permission:room-type-create');
-    Route::get       ('room-types/{id}',       [RoomTypesController::class, 'show'])    ->middleware('permission:room-type-show');
-    Route::put       ('room-types/{id}',       [RoomTypesController::class, 'update'])  ->middleware('permission:room-type-edit');
-    Route::delete    ('room-types/{id}',       [RoomTypesController::class, 'destroy']) ->middleware('permission:room-type-delete');
+    Route::get       ('room-types',       [RoomTypesController::class, 'index'])   ->middleware('permission:room-type-list');
+    Route::post      ('room-types/create',[RoomTypesController::class, 'store'])   ->middleware('permission:room-type-create');
+    Route::get       ('room-types/{id}',  [RoomTypesController::class, 'show'])    ->middleware('permission:room-type-show');
+    Route::put       ('room-types/{id}',  [RoomTypesController::class, 'update'])  ->middleware('permission:room-type-edit');
+    Route::delete    ('room-types/{id}',  [RoomTypesController::class, 'destroy']) ->middleware('permission:room-type-delete');
 
 });
