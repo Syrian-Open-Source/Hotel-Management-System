@@ -70,7 +70,11 @@ class UserController extends Controller
             'name' => 'string',
             'email' => 'email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
-            'roles_name' => 'required'
+            'roles_name' => 'required',
+            'phone_number' => 'integer|unique:users,phone_number',
+            'country' => 'string',
+            'city' => 'string',
+            'address' => 'string',
         ]);
 
         $input = $request->all();
