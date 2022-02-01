@@ -17,7 +17,7 @@ paths:
       tags:
         - staff
       summary: Staff information
-      description: Get Staff information
+      description: Get Work Staff information
       operationId: staff
 
       responses:

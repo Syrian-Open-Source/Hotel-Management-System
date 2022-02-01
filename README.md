@@ -1,6 +1,6 @@
 # Hotel management system
 
-Soooon.....
+Soooon......
 
 Credits
 -------
