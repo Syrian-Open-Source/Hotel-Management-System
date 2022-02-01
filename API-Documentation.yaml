@@ -1,0 +1,28 @@
+openapi: "3.0.1"
+
+info:
+  description: 'Api Documentation for Hotel Management System'
+  version: 1.0.0
+  title: Api Documentation for Hotel Management System
+
+tags:
+  - name: staff
+    description: Staff information
+  - name: auth
+    description: Users information
+
+paths:
+  /staff:
+    get:
+      tags:
+        - staff
+      summary: Staff information
+      description: Get Staff information
+      operationId: staff
+
+      responses:
+        '200':
+          description: OK
+
+servers:
+  - url: http://127.0.0.1:8000/api
