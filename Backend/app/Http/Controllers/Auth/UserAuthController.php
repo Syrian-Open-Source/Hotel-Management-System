@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserAuthRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserAuthController extends Controller
 {
@@ -39,5 +40,16 @@ class UserAuthController extends Controller
         return response(['user' => auth()->user(), 'token' => $token], 200);
 
     }
+
+    public function logout()
+    {
+    if (Auth::check())
+    {
+       Auth::user()->OauthAcessToken()->delete();
+       return response(['Message:'=>'User Logout successfully','Code:'=>'1'], 205);
+    }
+    return response(['Message:'=>'You Should Login first to perform this process','Code:'=>'0'], 205);
+    }
+
 
 }
