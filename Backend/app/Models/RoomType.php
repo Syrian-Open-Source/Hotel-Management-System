@@ -9,6 +9,6 @@ class RoomType extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'beds', 'stars'];
+    protected $fillable = ['name', 'beds', 'rate'];
 
 }

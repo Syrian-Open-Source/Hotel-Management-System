@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
-class RoomTypesPermissionSeeder extends Seeder
+class RoomPermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,15 +15,16 @@ class RoomTypesPermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'room-type-list',
-            'room-type-create',
-            'room-type-show',
-            'room-type-edit',
-            'room-type-delete',
+            'room-list',
+            'room-create',
+            'room-show',
+            'room-edit',
+            'room-delete',
         ];
 
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
+
     }
 }
