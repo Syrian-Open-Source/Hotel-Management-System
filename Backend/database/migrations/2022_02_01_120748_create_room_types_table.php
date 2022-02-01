@@ -17,7 +17,8 @@ class CreateRoomTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('beds');
-            $table->integer('stars');
+            $table->integer('rate')  ->default('0');
+            $table->integer('number')->default('0');
             $table->timestamps();
         });
     }

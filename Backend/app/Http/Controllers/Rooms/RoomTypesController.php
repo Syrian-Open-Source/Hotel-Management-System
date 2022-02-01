@@ -30,13 +30,13 @@ class RoomTypesController extends Controller
         $this->validate($request, [
             'name'  => 'required|string',
             'beds'  => 'required|integer',
-            'stars' => 'required|integer|between:1,5',
+            'rate' => 'required|integer|between:0,5',
         ]);
 
         $room_type = RoomType::create([
             'name'  => $request->name,
             'beds'  => $request->beds,
-            'stars' => $request->stars,
+            'rate' => $request->rate,
         ]);
 
         return response(['Message:'=>'Room Type Created successfully','Code:'=>'1','room type' => $room_type], 201);
@@ -69,7 +69,7 @@ class RoomTypesController extends Controller
         $this->validate($request, [
             'name'  => 'string',
             'beds'  => 'integer',
-            'stars' => 'integer|between:1,5',
+            'rate' => 'integer|between:0,5',
         ]);
 
         $input = $request->all();

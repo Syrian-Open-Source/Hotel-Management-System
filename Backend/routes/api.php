@@ -7,6 +7,7 @@ use App\Http\Controllers\Staff\StaffController;
 use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\Roles\UserController;
 use App\Http\Controllers\Rooms\RoomTypesController;
+use App\Http\Controllers\Rooms\RoomController;
 
 /** Staff Route */
 Route::get('staff',     [StaffController::class,'staff']);
@@ -43,5 +44,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get       ('room-types/{id}',  [RoomTypesController::class, 'show'])    ->middleware('permission:room-type-show');
     Route::put       ('room-types/{id}',  [RoomTypesController::class, 'update'])  ->middleware('permission:room-type-edit');
     Route::delete    ('room-types/{id}',  [RoomTypesController::class, 'destroy']) ->middleware('permission:room-type-delete');
+
+    /** Room Route */
+    Route::get       ('room',             [RoomController::class, 'index'])   ->middleware('permission:room-list');
+    Route::post      ('room/create',      [RoomController::class, 'store'])   ->middleware('permission:room-create');
+    Route::get       ('room/{id}',        [RoomController::class, 'show'])    ->middleware('permission:room-show');
+    Route::put       ('room/{id}',        [RoomController::class, 'update'])  ->middleware('permission:room-edit');
+    Route::delete    ('room/{id}',        [RoomController::class, 'destroy']) ->middleware('permission:room-delete');
 
 });
