@@ -13,9 +13,9 @@ class RoleController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:role-create', ['only' => ['create','store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:role-list', ['only' => ['index']]);
+        $this->middleware('permission:role-create', ['only' => ['store']]);
+        $this->middleware('permission:role-edit', ['only' => ['update']]);
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
@@ -45,7 +45,7 @@ class RoleController extends Controller
             'permission' => 'required',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['guard_name' => 'api', 'name' => $request->input('name')]);
 
         $role->syncPermissions($request->input('permission'));
 
@@ -66,7 +66,7 @@ class RoleController extends Controller
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
         ->where("role_has_permissions.role_id",$id)->get();
 
-        return response(['Message:'=>'Role info fetched successfully','Code:'=>'1','role' => $role], 200);
+        return response(['Message:'=>'Role info fetched successfully','Code:'=>'1','role' => $role, 'Role Permissions' => $rolePermissions], 200);
 
     }
 
