@@ -8,8 +8,10 @@ info:
 tags:
   - name: staff
     description: Staff information
-  - name: auth
+  - name: user
     description: Users information
+  - name: roles
+    description: Roles Route
 
 paths:
   /staff:
@@ -24,5 +26,125 @@ paths:
         '200':
           description: OK
 
+  /login:
+    post:
+      tags:
+        - user
+      summary: Login request
+      description: Login
+      operationId: login
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+
+              required:
+                - email
+                - password
+
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                password-confirm:
+                  type: string
+
+      responses:
+        '401':
+          description: Incorrect Data.
+        '200':
+          description: OK
+
+  /register:
+    post:
+      tags:
+        - user
+      summary: register
+      description: register
+      operationId: register
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+
+              required:
+                - name
+                - email
+                - password
+                - password-confirm
+                - phone_number
+                - country
+                - city
+
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                password-confirm:
+                  type: string
+                phone_number:
+                  type: number
+                country:
+                  type: string
+                city:
+                  type: string
+                address:
+                  type: string
+                VIP:
+                  type: boolean
+      responses:
+        '201':
+          description: Created successfully
+
+        '200':
+          description: OK
+
+  /logout:
+    post:
+      tags:
+        - user
+      summary: logout
+      description: logout
+      operationId: logout
+
+      responses:
+        '205':
+          description: User Logout successfully
+        '401':
+          description: You Should Login first to perform this process
+
+      security:
+        - bearerAuth: [] 
+
+  /roles:
+    get:
+      tags:
+        - roles
+      summary: Roles information
+      description: Get role list information
+      operationId: roles
+
+      responses:
+        '200':
+          description: OK
+
+      security:
+        - bearerAuth: [] 
+
 servers:
   - url: http://127.0.0.1:8000/api
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

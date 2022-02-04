@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('roles_name')->default('client');
             $table->rememberToken();
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->string('country');
             $table->string('city');
             $table->string('address')->nullable();
