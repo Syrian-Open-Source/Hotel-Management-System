@@ -23,7 +23,7 @@ class RoomTypesPermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['guard_name'=>'api','name' => $permission]);
+            Permission::create(['guard_name' => 'api','name' => $permission]);
         }
     }
 }

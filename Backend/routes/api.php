@@ -8,6 +8,8 @@ use App\Http\Controllers\Roles\RoleController;
 use App\Http\Controllers\Roles\UserController;
 use App\Http\Controllers\Rooms\RoomTypesController;
 use App\Http\Controllers\Rooms\RoomController;
+use App\Http\Controllers\Booking\BookingController;
+use App\Http\Controllers\Booking\CheckController;
 
 /** Staff Route */
 Route::get('staff',     [StaffController::class,'staff']);
@@ -51,5 +53,16 @@ Route::middleware('auth:api')->group(function () {
         Route::get       ('room/{id}',        [RoomController::class, 'show'])    ->middleware('permission:room-show');
         Route::put       ('room/{id}',        [RoomController::class, 'update'])  ->middleware('permission:room-edit');
         Route::delete    ('room/{id}',        [RoomController::class, 'destroy']) ->middleware('permission:room-delete');
+
+    /** Booking Route */
+    Route::get       ('booking',              [BookingController::class, 'index'])   ->middleware('permission:booking-list');
+    Route::get       ('booking/me',           [BookingController::class, 'my_booking']);
+    Route::post      ('booking/create',       [BookingController::class, 'store'])   ->middleware('permission:booking-create');
+    Route::get       ('booking/{id}',         [BookingController::class, 'show'])    ->middleware('permission:booking-show');
+    Route::put       ('booking/{id}',         [BookingController::class, 'update'])  ->middleware('permission:booking-edit');
+    Route::delete    ('booking/{id}',         [BookingController::class, 'destroy']) ->middleware('permission:booking-delete');
+
+    /** Check Route */
+    Route::post      ('Check',                [CheckController::class, 'store']);
 
 });

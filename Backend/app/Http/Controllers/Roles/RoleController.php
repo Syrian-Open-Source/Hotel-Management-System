@@ -46,7 +46,7 @@ class RoleController extends Controller
             'permissions' => 'required|array',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['guard_name' => 'api', 'name' => $request->input('name')]);
 
         $permissions = [$request->permissions];
 

@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof UnauthorizedException) {
-            return response()->json(['User have no permission for this action.']);
+            return response()->json(['User does not have the right roles.'],403);
         }
 
     return parent::render($request, $exception);

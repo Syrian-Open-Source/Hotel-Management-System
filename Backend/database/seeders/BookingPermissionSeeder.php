@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-class RoomPermissionSeeder extends Seeder
+class BookingPermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,11 @@ class RoomPermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'room-list',
-            'room-create',
-            'room-show',
-            'room-edit',
-            'room-delete',
+            'booking-list',
+            'booking-create',
+            'booking-show',
+            'booking-edit',
+            'booking-delete',
         ];
 
         foreach ($permissions as $permission) {

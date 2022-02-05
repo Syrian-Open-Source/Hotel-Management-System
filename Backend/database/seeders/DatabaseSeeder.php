@@ -5,6 +5,7 @@ use  Database\Seeders\PermissionSeeder;
 use  Database\Seeders\CreateSuperAdminUserSeeder;
 use  Database\Seeders\RoomTypesPermissionSeeder;
 use  Database\Seeders\RoomPermissionSeeder;
+use  Database\Seeders\BookingPermissionSeeder;
 
 use Illuminate\Database\Seeder;
 
@@ -18,9 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(StaffSeeder::class);
+        $this->call(PermissionSeeder::class);
         $this->call(RoomTypesPermissionSeeder::class);
         $this->call(RoomPermissionSeeder::class);
-        $this->call(PermissionSeeder::class);
+        $this->call(BookingPermissionSeeder::class);
         $this->call(CreateSuperAdminUserSeeder::class);
     }
 }

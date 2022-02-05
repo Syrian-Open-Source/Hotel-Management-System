@@ -21,12 +21,12 @@ class CreateSuperAdminUserSeeder extends Seeder
             'email' => 'admin@test.com',
             'password' => bcrypt('123456'),
             'roles_name' => 'Super-Admin',
-            'phone_number' => '0123456789',
-            'country'  => 'SY',
-            'city'  => 'Lattakia',
+            'phone_number' => '00000000',
+            'country' => 'SY',
+            'city' => 'Lattakia',
         ]);
 
-        $role = Role::create(['guard_name'=>'api','name' => 'Super-Admin']);
+        $role = Role::create(['guard_name' => 'api', 'name' => 'Super-Admin']);
         $permissions = Permission::pluck('id','id')->all();
 
         $role->syncPermissions($permissions);
