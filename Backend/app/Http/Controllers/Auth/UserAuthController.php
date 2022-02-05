@@ -16,10 +16,11 @@ class UserAuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
-            'phone_number' => 'required|integer|unique:users,phone_number',
+            'phone_number' => 'required|numeric|unique:users,phone_number',
             'country' => 'required|string',
             'city' => 'required|string',
             'address' => 'string',
+            'VIP' => 'boolean'
         ]);
 
         $data['password'] = bcrypt($request->password);
@@ -52,7 +53,7 @@ class UserAuthController extends Controller
        Auth::user()->OauthAcessToken()->delete();
        return response(['Message:'=>'User Logout successfully','Code:'=>'1'], 205);
     }
-    return response(['Message:'=>'You Should Login first to perform this process','Code:'=>'0'], 205);
+    return response(['Message:'=>'You Should Login first to perform this process','Code:'=>'-1'], 401);
     }
 
 

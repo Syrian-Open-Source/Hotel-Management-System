@@ -13,8 +13,9 @@ class RoleController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:role-list', ['only' => ['index']]);
+        $this->middleware('permission:role-list', ['only' => ['index',]]);
         $this->middleware('permission:role-create', ['only' => ['store']]);
+        $this->middleware('permission:role-show', ['only' => ['show']]);
         $this->middleware('permission:role-edit', ['only' => ['update']]);
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
@@ -42,12 +43,17 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'permissions' => 'required|array',
         ]);
 
         $role = Role::create(['guard_name' => 'api', 'name' => $request->input('name')]);
 
-        $role->syncPermissions($request->input('permission'));
+        $permissions = [$request->permissions];
+
+        foreach ($permissions as $permission)
+        {
+            $role->syncPermissions($permission);
+        }
 
         return response(['Message:'=>'Role Created successfully','Code:'=>'1','role' => $role], 201);
 
@@ -80,16 +86,32 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
+            'name' => 'unique:roles,name',
+            'permissions' => 'array',
         ]);
 
         $role = Role::find($id);
 
-        $role->name = $request->input('name');
+        if (empty($request))
+        {
+            return response(['Message:'=>'You Cant send an empty request','Code:'=>'-1'], 400);
+        }
+
+        if (!empty( $request->input('name'))) {
+            $role->name = $request->input('name');
+        }
+
         $role->save();
 
-        $role->syncPermissions($request->input('permission'));
+        if (!empty($request->input('permissions'))) {
+
+            $permissions = [$request->permissions];
+
+            foreach ($permissions as $permission)
+            {
+                $role->syncPermissions($permission);
+            }
+        }
 
         return response(['Message:'=>'Role edited successfully','Code:'=>'1','role' => $role], 200);
 
