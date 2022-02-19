@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Review;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRate;
 use Illuminate\Http\Request;
 use App\Models\Rate;
 use App\Models\Room;
@@ -33,22 +34,19 @@ class RateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRate $request)
     {
-        $this->validate($request,[
-            'room_id' => 'required|integer|exists:rooms,id',
-            'rate'  => 'required|integer|in:1,2,3,4,5'
-        ]);
+        $data = $request->validated();
 
         $rate = Rate::create([
             'user_id'       => auth()->user()->id,
-            'room_id'       => $request->room_id,
-            'rate'          => $request->rate,
+            'room_id'       => $data->room_id,
+            'rate'          => $data->rate,
         ]);
 
-        $room_rate = Rate::avg('rate')->where('room_id',$request->room_id);
+        $room_rate = Rate::avg('rate')->where('room_id',$data->room_id);
 
-        $room = Room::where('id', $request->room_id);
+        $room = Room::where('id', $data->room_id);
 
         $room->update([
             'rate' => $room_rate,

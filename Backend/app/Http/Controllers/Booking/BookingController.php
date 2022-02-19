@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Booking;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBooking;
+use App\Http\Requests\UpdateBooking;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Auth;
@@ -33,20 +35,16 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBooking $request)
     {
-        $this->validate($request, [
-            'room_id'  => 'required|integer|exists:rooms,id',
-            'start_date'     => 'required|date|date_format:Y-m-d|after_or_equal:today',
-            'end_date'      => 'required|date|date_format:Y-m-d|after_or_equal:start_date'
-        ]);
+        $data = $request->validated();
 
         $booking = Booking::create([
             'user_id'       => auth()->user()->id,
-            'room_id'       => $request->room_id,
+            'room_id'       => $data->room_id,
             'status'        => true,
-            'start_date'    => $request->start_date,
-            'end_date'      => $request->end_date,
+            'start_date'    => $data->start_date,
+            'end_date'      => $data->end_date,
         ]);
 
         return response(['Message:'=>'Booking Created successfully','Code:'=>'1','booking' => $booking], 201);
@@ -74,19 +72,12 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBooking $request, $id)
     {
-        $this->validate($request, [
-            'room_id'        => 'integer|exists:rooms,id',
-            'start_date'     => 'date|date_format:Y-m-d|after_or_equal:today',
-            'end_date'       => 'date|date_format:Y-m-d|after_or_equal:start_date',
-            'status'         => 'in:true,false'
-        ]);
-
-        $input = $request->all();
+        $data = $request->validated();
 
         $booking = Booking::find($id);
-        $booking->update($input);
+        $booking->update($data);
 
         return response(['Message:'=>'Booking info edited successfully','Code:'=>'1','Booking' => $booking], 200);
 

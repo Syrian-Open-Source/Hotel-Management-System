@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Rooms;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRoom;
 use Illuminate\Http\Request;
 use App\Models\Room;
 
@@ -25,22 +26,16 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRoom $request)
     {
-        $this->validate($request, [
-            'room_type'  => 'required|integer|exists:room_types,id',
-            'rate'       => 'integer|between:0,5',
-            'extra'      => 'string',
-            'status'     => 'boolean',
-            'price'      => 'integer|min:1'
-        ]);
+        $data = $request->validated();
 
         $room = Room::create([
-            'room_type' => $request->room_type,
-            'rate'      => $request->rate,
-            'extra'     => $request->extra,
-            'status'    => $request->status,
-            'price'     => $request->price,
+            'room_type' => $data->room_type,
+            'rate'      => $data->rate,
+            'extra'     => $data->extra,
+            'status'    => $data->status,
+            'price'     => $data->price,
         ]);
 
         return response(['Message:'=>'Room Created successfully','Code:'=>'1','room' => $room], 201);
@@ -70,18 +65,10 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'room_type'  => 'integer|exists:room_types,id',
-            'rate'       => 'integer|between:0,5',
-            'extra'      => 'string',
-            'status'     => 'boolean',
-            'price'      => 'integer|min:1'
-        ]);
-
-        $input = $request->all();
+        $data = $request->validated();
 
         $room = Room::find($id);
-        $room->update($input);
+        $room->update($data);
 
         return response(['Message:'=>'Room info edited successfully','Code:'=>'1','room type' => $room], 200);
 

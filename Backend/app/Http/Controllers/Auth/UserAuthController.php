@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserAuthRegister;
 use App\Http\Requests\UserAuthRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,18 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserAuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(UserAuthRegister $request)
     {
-        $data = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
-            'phone_number' => 'required|numeric|unique:users,phone_number',
-            'country' => 'required|string',
-            'city' => 'required|string',
-            'address' => 'string',
-            'VIP' => 'boolean'
-        ]);
+        $data = $request->validated();
 
         $data['password'] = bcrypt($request->password);
 
