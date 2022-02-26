@@ -2,21 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserAuthRequest extends FormRequest
+class StoreRate extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -26,21 +17,16 @@ class UserAuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'email|required',
-            'password' => 'required'
+            'room_id' => 'required|integer|exists:rooms,id',
+            'rate'  => 'required|integer|in:1,2,3,4,5'
         ];
     }
 
-    /**
-     * Custom message for validation
-     *
-     * @return array
-     */
     public function messages()
     {
         return [
-            'email.required' => 'Email is required!',
-            'password.required' => 'Password is required!'
+            'room_id.required' => 'Room ID is required!',
+            'rate.required' => 'Rate is required!',
         ];
     }
 
