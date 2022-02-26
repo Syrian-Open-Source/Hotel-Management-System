@@ -1,6 +1,8 @@
 # Hotel management system
 
-Soooon......
+Our online Hotel Management System is a web application. This system was developed to automate day to day activity of a Hotel. It will help you to have more technical competencies such as serving, revenue management, accounting, and facilities management. You can also monitor every thing from the admin panel, an admin user can monitor everything.
+
+We will document all the coming features and usage of this project when we lunch our first staple release. 
 
 Credits
 -------
