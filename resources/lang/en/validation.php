@@ -157,6 +157,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'room_type' => 'Room Type',
+        'rate' => 'Rate',
+        'price' => 'Price',
+    ],
 
 ];

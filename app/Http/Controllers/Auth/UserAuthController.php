@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserAuthRegister;
-use App\Http\Requests\UserAuthRequest;
+use App\Http\Requests\UserAuthRegisterRequest;
+use App\Http\Requests\UserAuthRequestRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserAuthController extends Controller
 {
-    public function register(UserAuthRegister $request)
+    public function register(UserAuthRegisterRequest $request)
     {
         $data = $request->validated();
 
@@ -24,7 +24,7 @@ class UserAuthController extends Controller
         return response(['user' => $user, 'token' => $token], 201);
     }
 
-    public function login(UserAuthRequest $request)
+    public function login(UserAuthRequestRequest $request)
     {
         $data = $request->validated();
 

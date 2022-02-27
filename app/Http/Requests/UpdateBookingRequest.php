@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateBooking extends BaseRequest
+class UpdateBookingRequest extends BaseRequest
 {
 
     /**
@@ -28,13 +26,6 @@ class UpdateBooking extends BaseRequest
         return [
             'room_id.exists' => 'Room id is not exist!',
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-        'errors' => $validator->errors(),
-        ], 422));
     }
 
 }

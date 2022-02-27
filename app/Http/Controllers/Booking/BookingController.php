@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Booking;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBooking;
-use App\Http\Requests\UpdateBooking;
+use App\Http\Requests\StoreBookingRequest;
+use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Auth;
@@ -35,7 +35,7 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBooking $request)
+    public function store(StoreBookingRequest $request)
     {
         $data = $request->validated();
 
@@ -72,7 +72,7 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBooking $request, $id)
+    public function update(UpdateBookingRequest $request, $id)
     {
         $data = $request->validated();
 

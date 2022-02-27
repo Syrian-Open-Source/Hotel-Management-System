@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserAuthRequest extends BaseRequest
+class UserAuthRequestRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -33,11 +31,5 @@ class UserAuthRequest extends BaseRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-        'errors' => $validator->errors(),
-        ], 422));
-    }
 
 }

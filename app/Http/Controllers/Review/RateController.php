@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Review;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRate;
+use App\Http\Requests\StoreRateRequest;
 use Illuminate\Http\Request;
 use App\Models\Rate;
 use App\Models\Room;
@@ -34,7 +34,7 @@ class RateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRate $request)
+    public function store(StoreRateRequest $request)
     {
         $data = $request->validated();
 

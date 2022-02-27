@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreBooking extends BaseRequest
+class StoreBookingRequest extends BaseRequest
 {
 
     /**
@@ -30,13 +28,6 @@ class StoreBooking extends BaseRequest
             'start_date.required' => 'Start Date is required!',
             'end_date.required' => 'End Date is required!',
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-        'errors' => $validator->errors(),
-        ], 422));
     }
 
 }

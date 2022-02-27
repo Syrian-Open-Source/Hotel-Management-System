@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Rooms;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRoom;
+use App\Http\Requests\StoreRoomRequest;
 use Illuminate\Http\Request;
 use App\Models\Room;
 
@@ -26,7 +26,7 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRoom $request)
+    public function store(StoreRoomRequest $request)
     {
         $data = $request->validated();
 

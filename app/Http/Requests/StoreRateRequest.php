@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreRate extends BaseRequest
+class StoreRateRequest extends BaseRequest
 {
 
 
@@ -28,13 +26,6 @@ class StoreRate extends BaseRequest
             'room_id.required' => 'Room ID is required!',
             'rate.required' => 'Rate is required!',
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-        'errors' => $validator->errors(),
-        ], 422));
     }
 
 }

@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreRoom extends BaseRequest
+class StoreRoomRequest extends BaseRequest
 {
 
     /**
@@ -31,13 +29,6 @@ class StoreRoom extends BaseRequest
             'rate.integer' => 'Your Rate should be between 0 and 5 !',
             'price.min' => 'You cant but a price less than 1$ !',
         ];
-    }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-        'errors' => $validator->errors(),
-        ], 422));
     }
 
 }
