@@ -39,12 +39,4 @@ class UserAuthRegister extends BaseRequest
             'city.required' => 'Password is required!',
         ];
     }
-
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-        'errors' => $validator->errors(),
-        ], 422));
-    }
-
 }
