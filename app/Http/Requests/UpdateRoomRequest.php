@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 
-class UpdateRoom extends BaseRequest
+class UpdateRoomRequest extends BaseRequest
 {
 
     /**
@@ -19,15 +19,6 @@ class UpdateRoom extends BaseRequest
             'extra'      => 'string',
             'status'     => 'boolean',
             'price'      => 'integer|min:1'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'room_type.exists' => 'Your room type is not exist!',
-            'rate.integer' => 'Your Rate should be between 0 and 5 !',
-            'price.min' => 'You cant but a price less than 1$ !',
         ];
     }
 

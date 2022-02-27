@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 
-class StoreRate extends BaseRequest
+class StoreRateRequest extends BaseRequest
 {
 
 

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 
-class UserAuthRequest extends BaseRequest
+class UserAuthRequestRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.

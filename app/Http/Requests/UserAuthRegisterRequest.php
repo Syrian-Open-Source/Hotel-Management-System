@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 
-class UserAuthRegister extends BaseRequest
+class UserAuthRegisterRequest extends BaseRequest
 {
 
     /**

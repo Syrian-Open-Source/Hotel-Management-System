@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 
-class UpdateBooking extends BaseRequest
+class UpdateBookingRequest extends BaseRequest
 {
 
     /**

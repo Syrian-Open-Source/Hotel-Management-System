@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 
-class StoreRoom extends BaseRequest
+class StoreRoomRequest extends BaseRequest
 {
 
     /**
