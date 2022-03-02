@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Booking;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Booking;
-use Illuminate\Http\Request;
 use Auth;
 
-class BookingController extends Controller
+class BookingController extends BaseController
 {
     /**
      * Display a listing of the resource.
