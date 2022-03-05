@@ -58,7 +58,7 @@ Route::middleware('auth:api')->group(function () {
 
     /** Booking Route */
         Route::get       ('booking',          [BookingController::class, 'index'])   ->middleware('permission:booking-list');
-        Route::get       ('booking/me',       [BookingController::class, 'my_booking']);
+        Route::get       ('booking/me',       [BookingController::class, 'myBooking']);
         Route::post      ('booking/create',   [BookingController::class, 'store'])   ->middleware('permission:booking-create');
         Route::get       ('booking/{id}',     [BookingController::class, 'show'])    ->middleware('permission:booking-show');
         Route::put       ('booking/{id}',     [BookingController::class, 'update'])  ->middleware('permission:booking-edit');
