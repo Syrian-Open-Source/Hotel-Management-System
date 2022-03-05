@@ -14,17 +14,19 @@ class BookingController extends BaseController
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \App\Exceptions\PublicException
      */
     public function index()
     {
-        $booking = Booking::where('active',false)->get();
-        return response(['Booking' => $booking], 200);
+        return $this->responseSuccess(
+            ['Booking' => Booking::all()],
+        );
 
     }
 
-    public function my_booking()
+    public function myBooking()
     {
-        $booking = Booking::where('user_id',auth()->user()->id)->get();
+        $booking = Booking::where('user_id', auth()->user()->id)->get();
         return response(['Booking' => $booking], 200);
     }
 
@@ -32,6 +34,7 @@ class BookingController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreBookingRequest $request)
@@ -39,14 +42,14 @@ class BookingController extends BaseController
         $data = $request->validated();
 
         $booking = Booking::create([
-            'user_id'       => auth()->user()->id,
-            'room_id'       => $data->room_id,
-            'status'        => true,
-            'start_date'    => $data->start_date,
-            'end_date'      => $data->end_date,
+            'user_id' => auth()->user()->id,
+            'room_id' => $data->room_id,
+            'status' => true,
+            'start_date' => $data->start_date,
+            'end_date' => $data->end_date,
         ]);
 
-        return response(['Message:'=>'Booking Created successfully','Code:'=>'1','booking' => $booking], 201);
+        return response(['Message:' => 'Booking Created successfully', 'Code:' => '1', 'booking' => $booking], 201);
 
     }
 
@@ -54,13 +57,14 @@ class BookingController extends BaseController
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $booking = Booking::find($id);
 
-        return response(['Message:'=>'Booking info fetched successfully','Code:'=>'1','user' => $booking], 200);
+        return response(['Message:' => 'Booking info fetched successfully', 'Code:' => '1', 'user' => $booking], 200);
 
     }
 
@@ -69,6 +73,7 @@ class BookingController extends BaseController
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateBookingRequest $request, $id)
@@ -78,7 +83,7 @@ class BookingController extends BaseController
         $booking = Booking::find($id);
         $booking->update($data);
 
-        return response(['Message:'=>'Booking info edited successfully','Code:'=>'1','Booking' => $booking], 200);
+        return response(['Message:' => 'Booking info edited successfully', 'Code:' => '1', 'Booking' => $booking], 200);
 
     }
 
@@ -86,11 +91,12 @@ class BookingController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Booking::find($id)->delete();
-        return response(['Message:'=>'Booking deleted successfully','Code:'=>'1'], 204);
+        return response(['Message:' => 'Booking deleted successfully', 'Code:' => '1'], 204);
     }
 }
