@@ -326,7 +326,7 @@ if (!function_exists('requestForApi')) {
     function requestForApi()
     {
         try {
-            return Route::current() != null && Route::current()->getPrefix() == 'api/';
+            return Route::current() != null && Route::current()->getPrefix() == 'api';
 
         } catch (\Exception $e) {
             throw new PublicException(
