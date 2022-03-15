@@ -44,12 +44,8 @@ class RateController extends Controller
             'rate'          => $data->rate,
         ]);
 
-        $room_rate = Rate::avg('rate')->where('room_id',$data->room_id);
-
-        $room = Room::where('id', $data->room_id);
-
-        $room->update([
-            'rate' => $room_rate,
+       Room::where('id', $data->room_id)->update([
+            'rate' => Rate::where('room_id',$data->room_id)->avg('rate'),
         ]);
 
         return response(['Message:'=>'Rate Created successfully','Code:'=>'1','Rate' => $rate], 201);
@@ -74,7 +70,9 @@ class RateController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -82,17 +80,10 @@ class RateController extends Controller
             'rate'  => 'required|integer|in:1,2,3,4,5'
         ]);
 
-        $input = $request->all();
+        $rate = Rate::findOrFail($id)->update($request->all());
 
-        $rate = Rate::find($id);
-        $rate->update($input);
-
-        $room_rate = Rate::avg('rate')->where('room_id',$rate->room_id);
-
-        $room = Room::where('id', $rate->room_id);
-
-        $room->update([
-            'rate' => $room_rate,
+        Room::where('id', $rate->room_id)->update([
+            'rate' => Rate::avg('rate')->where('room_id',$rate->room_id),
         ]);
 
         return response(['Message:'=>'Rate info edited successfully','Code:'=>'1','Rate' => $rate], 200);
