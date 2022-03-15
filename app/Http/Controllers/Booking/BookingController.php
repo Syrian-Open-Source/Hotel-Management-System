@@ -39,9 +39,7 @@ class BookingController extends BaseController
      */
     public function store(StoreBookingRequest $request)
     {
-        $data = $request->validated();
-
-        $booking = Booking::create($data);
+        $booking = Booking::create($request->validated());
 
         return response(['Message:' => 'Booking Created successfully', 'Code:' => '1', 'booking' => $booking], 201);
 
