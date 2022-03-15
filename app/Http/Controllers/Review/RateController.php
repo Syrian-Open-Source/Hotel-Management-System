@@ -44,12 +44,8 @@ class RateController extends Controller
             'rate'          => $data->rate,
         ]);
 
-        $room_rate = Rate::avg('rate')->where('room_id',$data->room_id);
-
-        $room = Room::where('id', $data->room_id);
-
-        $room->update([
-            'rate' => $room_rate,
+       Room::where('id', $data->room_id)->update([
+            'rate' => Rate::where('room_id',$data->room_id)->avg('rate'),
         ]);
 
         return response(['Message:'=>'Rate Created successfully','Code:'=>'1','Rate' => $rate], 201);
